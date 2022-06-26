@@ -2,10 +2,13 @@ import sys
 import time
 import pydirectinput
 import pyautogui
-from airtest.core.api import *
 
+
+from airtest.core.api import *
+from datetime import datetime
 LEFT = "left"
 RIGHT = "right"
+UP = "up"
 DOWN = "down"
 CancelOrAccel = "esc"
 Enter = "enter"
@@ -35,6 +38,8 @@ def left():
     press(LEFT)
 def right():
     press(RIGHT)
+def up():
+    press(DOWN)
 def down():
     press(DOWN)
 
@@ -91,16 +96,34 @@ def find_img(img,need_log=False):
 def find_ps_remote_play_window():
     return pyautogui.getWindowsWithTitle("PS Remote Play")[0]
 
-def resize_window():
-    a = find_ps_remote_play_window()
+region = [0,0,1788,1109]
 
-    region = [0,0,1092,717]
+def resize_window():
+    global region
+    a = find_ps_remote_play_window()
+    l(a.size)
+
     a.moveTo(region[0], region[1]) # 奇怪的windows 需要-10才能靠左不然会有一条边出来
     a.resizeTo(region[2], region[3])
 
     mouse_focus()
     sleep(1)
 
+def get_screen_shot_name():
+    now = datetime.now().strftime("%Y-%m-%d_%H_%M_%S")
+    # print("ScreenShot at ", now)
+    return f'./screenshot/{now}.png'
+
+# 检测黑边
+# 检测截取范围
+
+def screen_shoot():
+    global  region
+    new_region= [98,120,1587,891]
+    screenshot = pyautogui.screenshot(region=new_region)
+    file_name = get_screen_shot_name()
+    screenshot.save(file_name)
+    return file_name
 
 def mouse_focus(need_log=False):
     a = find_ps_remote_play_window()
@@ -111,3 +134,28 @@ def mouse_focus(need_log=False):
     pyautogui.moveTo(ps_win_center.x,ps_win_center.y)
     a.activate()
     pyautogui.click()
+
+
+
+
+def all_pixel_match(pos_and_pixels = [],falls_call_back_func=None):
+    try:
+        start = time.time()
+        if len(pos_and_pixels) <= 0:
+            l(f"not get  PIXEL pos_and_pixels")
+            return False
+
+        boolean_expressions = [pyautogui.pixelMatchesColor(row[0],row[1],row[2],tolerance=10)  for row in pos_and_pixels]
+        result = all(boolean_expressions)
+        l(f"detect PIXEL found res : {result}, {time.time() - start} s,{boolean_expressions}")
+        if result == False:
+            if falls_call_back_func != None:
+                falls_call_back_func()
+            all_pixel_match(pos_and_pixels,falls_call_back_func)
+        else:
+            return True
+
+    except Exception as e:
+        print(e)
+        all_pixel_match(pos_and_pixels,falls_call_back_func)
+

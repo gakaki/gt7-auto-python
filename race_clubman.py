@@ -5,39 +5,46 @@ from img import *
 #  just input esc to direct race until img continue image appear
 def drag_race():
     l("in drag race")
-    key_down(CancelOrAccel)
+    key_down(UP)
+    # key_down(CancelOrAccel)
 
-    sleep(8)
-
-    for i in range(1, 5):
-        right()
-        sleep(0.2)
+    # sleep(8)
+    #
+    # for i in range(1, 5):
+    #     right()
+    #     sleep(0.2)
 
     while True:
         if img_double_exists(IMG_CONTINUE_TEXT) == False:
             l(f"detect image continue with text res : False")
             sleep(1)
         else:
+            l(f"detect image continue with text res : True")
             l("game break")
-            key_up(CancelOrAccel)
+            key_up(UP)
+            # key_up(CancelOrAccel)
+
             sleep(7)
             return
 
 
 # in the game calculate score page
 def calc_dashboard():
-    l("in dashboard ...")
+    try:
+        l("in dashboard ...")
     #     because image detect need 2s if not found
-    while img_double_exists(IMG_EXIT_TEXT) == False:
-        l("found exit button : False")
-        btn_confirm()
+        while img_double_exists(IMG_EXIT_TEXT) == False:
+            l("found exit button : False")
+            btn_confirm()
 
-    l("found exit button : True")
+        l("found exit button : True")
 
+        btn_confirm()  # press exit
 
-    btn_confirm()  # press exit
-
-    l("out dashboard")
+        l("out dashboard")
+    except Exception as e:
+        print(e)
+        calc_dashboard()
 
 
 def in_replay():

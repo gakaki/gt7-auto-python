@@ -1,3 +1,4 @@
+from race_clubman import calc_dashboard
 from util import *
 from img import *
 import random
@@ -93,7 +94,7 @@ def pan_america_next_round():
 def pan_america():
     world_race_choose()
     pan_america_game()
-    pan_america_dashboard()
+    calc_dashboard()
     pan_america_replay()
     pan_america_next_round()
     pan_america()
