@@ -2,3 +2,15 @@ airtest
 pydirectinput
 pyautogui
 pynput
+d3dshot
+mss
+moviepy
+Pillow
+
+
+pip install pypiwin32
+pip install mss
+
+
+#python3 -m pip install --upgrade pip
+#python3 -m pip install --upgrade Pillow

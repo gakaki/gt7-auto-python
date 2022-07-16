@@ -25,9 +25,9 @@ pydirectinput.FAILSAFE = False
 
 resize_window()
 
-print('Main Thread: Start reward117')
+print('Main Thread: Start race_clubman')
 # just change reward117 with 'race_clubman' or race_x or race_dyna or race_pan_america
-thread = Thread(target=reward117)
+thread = Thread(target=race_clubman)
 # thread = Thread(target=race_clubman)
 # thread = Thread(target=race_x())
 # thread = Thread(target=race_dyna)

@@ -9,6 +9,7 @@
 
 
 ### ChangeLog
+2022.07.17 update for 1.18 tokyo express pp550 race
 
 2022.06.26 update for 1.17 reward bug
 
@@ -24,14 +25,16 @@
     
     python main.py
     
-    # default use the afk of reward bug in 1.17 version
     
     windows 10 ( administrator privileges ) or macos,linux not support ps remote play, use the chiaki
     python 3.9+ or Anaconda
     Ps remote play or  chiaki
     PyCharm or vscode if need development or code debug
 
-  current 1.17 version unlimited engine swap and unlimited get reward is recommend for earn the cr and cars.
+
+   1.18 version the 1.17 extra menus reward is no effect,Please not use
+    
+   1.17 version unlimited engine swap and unlimited get reward is recommend for earn the cr and cars.
 
 
     >>> reward117

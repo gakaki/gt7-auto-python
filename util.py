@@ -136,8 +136,6 @@ def mouse_focus(need_log=False):
     pyautogui.click()
 
 
-
-
 def all_pixel_match(pos_and_pixels = [],falls_call_back_func=None):
     try:
         start = time.time()
